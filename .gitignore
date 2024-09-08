@@ -1,0 +1,15 @@
+.vscode/
+*.dll
+*.exe
+*.pdb
+*.obj
+*.ilk
+*.exp
+*.lib
+*.a
+*.o
+
+src/raylib/rmem.h    
+src/raylib/raylib.h  
+src/raylib/physac.h  
+src/raylib/raymath.h
