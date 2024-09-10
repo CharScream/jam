@@ -1,4 +1,6 @@
-#include "raylib/raylib.h"
+#pragma once
+
+#include <raylib.h>
 
 typedef struct GameState
 {

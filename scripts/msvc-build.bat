@@ -2,19 +2,20 @@
 
 set LINKER_FLAGS=/link raylib.lib kernel32.lib user32.lib shell32.lib winmm.lib gdi32.lib opengl32.lib -incremental:no -opt:ref
 set EXPORTED_FUNCTIONS=/EXPORT:Update /EXPORT:Initialize /EXPORT:HotReload /EXPORT:HotUnload
-set COMMON_FLAGS=/Zi /nologo 
+set extdir=..\..\..\src\external
+set COMMON_FLAGS=/Zi /nologo /I%extdir% /I%extdir%\raylib\src\
 set EXE_NAME=game.exe
 set DLL_NAME=game_code.dll
 
 call msvc_upgrade_cmd_64.bat
-cd ..\bin
+pushd ..\build\windows\bin
 
 echo LOCKFILE IN AID OF HOTLOADING > lock.file
-cl ..\src\hotloaded_main.c /LD /Fe:%DLL_NAME% %COMMON_FLAGS% %LINKER_FLAGS% %EXPORTED_FUNCTIONS%
+cl ..\..\..\src\hotloaded_main.c /LD /Fe:%DLL_NAME% %COMMON_FLAGS% %LINKER_FLAGS% %EXPORTED_FUNCTIONS%
 del lock.file
-cl ..\src\executable_main.c /D_AMD64_ /Fe:%EXE_NAME% %COMMON_FLAGS% %LINKER_FLAGS%
+cl ..\..\..\src\executable_main.c /D_AMD64_ /Fe:%EXE_NAME% %COMMON_FLAGS% %LINKER_FLAGS%
 
-cd ..\scripts
+popd
 
 REM Comments
 REM /LD   - create a dll file, dynamic library

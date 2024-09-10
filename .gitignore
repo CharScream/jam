@@ -8,6 +8,7 @@
 *.lib
 *.a
 *.o
+build/
 
 src/raylib/rmem.h    
 src/raylib/raylib.h  

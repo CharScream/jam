@@ -1,1 +1,1 @@
-bin\game.exe
+build\windows\bin\game.exe

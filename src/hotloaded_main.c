@@ -1,12 +1,33 @@
+#include <raylib.h>
 #include "shared.h"
+
+#define PLAYER_SPEED 300
 
 // Called on every frame
 void Update(GameState *gameState)
 {
+    static float x = 0;
+    static float y = 0;
     BeginDrawing();
     {
         ClearBackground((Color){25, 25, 25, 255});
-        DrawRectangle(600, 100, 100, 100, (Color){100, 150, 50, 255});
+        if (IsKeyDown(KEY_D)) 
+        {
+            x += GetFrameTime() * PLAYER_SPEED;
+        }
+        if (IsKeyDown(KEY_A)) 
+        {
+            x -= GetFrameTime() * PLAYER_SPEED;
+        }
+        if (IsKeyDown(KEY_S)) 
+        {
+            y += GetFrameTime() * PLAYER_SPEED;
+        }
+        if (IsKeyDown(KEY_W)) 
+        {
+            y -= GetFrameTime() * PLAYER_SPEED;
+        }
+        DrawRectangle((int)x, (int)y, 100, 100, (Color){100, 150, 50, 255});
     }
     EndDrawing();
 }

@@ -1,26 +1,28 @@
 @echo off
 
+if exist ..\build\windows\bin\raylib.dll exit /b
+
+set raylibdir=..\..\..\src\external\raylib\src\
+
 set LIBRARIES=kernel32.lib user32.lib shell32.lib winmm.lib gdi32.lib opengl32.lib
-set RAYLIB=core.c models.c raudio.c rglfw.c shapes.c text.c textures.c utils.c -I.\external\glfw\include
+set RAYLIB=%raylibdir%rcore.c %raylibdir%rmodels.c %raylibdir%raudio.c %raylibdir%rglfw.c %raylibdir%rshapes.c %raylibdir%rtext.c %raylibdir%rtextures.c %raylibdir%utils.c -I%raylibdir%\external\glfw\include
 set RAYLIB_DEFINES=/DBUILD_LIBTYPE_SHARED /DPLATFORM_DESKTOP
 
 call msvc_upgrade_cmd_64.bat
 
-cd ..
-mkdir bin
-cd src\raylib\src
+if not exist ..\build\windows mkdir ..\build\windows
+pushd ..\build\windows
+if not exist obj mkdir obj
+if not exist bin mkdir bin
+pushd obj
 
 :: lmao
-windres raylib.dll.rc -O coff -o raylib.dll.rc.data --target=pe-x86-64
+windres %raylibdir%raylib.dll.rc -O coff -o %raylibdir%raylib.dll.rc.data --target=pe-x86-64
 
 cl /LD %RAYLIB_DEFINES%  /Fe: "raylib" %RAYLIB% /link %LIBRARIES%
 
-copy raylib.h        ..
-copy rmem.h          ..
-copy physac.h        ..
-copy raymath.h       ..
+mv raylib.dll ..\bin
+mv raylib.lib ..\bin
 
-copy raylib.dll ..\..\..\bin
-copy raylib.lib ..\..\..\bin
-
-cd ..\..\..\scripts
+popd
+popd
