@@ -1,4 +1,4 @@
 -Isrc\external
 -Isrc\external\raylib\src
--Isrc\externa\emsdk\upstream\emscripten\cache\sysroot\include
+-Isrc\external\emsdk\upstream\emscripten\cache\sysroot\include
 

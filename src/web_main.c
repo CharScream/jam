@@ -1,5 +1,5 @@
 #include "shared.h"
-#include "hotloaded_main.c"
+#include "game.c"
 
 #include <emscripten/emscripten.h>
 

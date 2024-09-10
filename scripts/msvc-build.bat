@@ -11,7 +11,7 @@ call msvc_upgrade_cmd_64.bat
 pushd ..\build\windows\bin
 
 echo LOCKFILE IN AID OF HOTLOADING > lock.file
-cl ..\..\..\src\hotloaded_main.c /LD /Fe:%DLL_NAME% %COMMON_FLAGS% %LINKER_FLAGS% %EXPORTED_FUNCTIONS%
+cl ..\..\..\src\game.c /LD /Fe:%DLL_NAME% %COMMON_FLAGS% %LINKER_FLAGS% %EXPORTED_FUNCTIONS%
 del lock.file
 cl ..\..\..\src\executable_main.c /D_AMD64_ /Fe:%EXE_NAME% %COMMON_FLAGS% %LINKER_FLAGS%
 
